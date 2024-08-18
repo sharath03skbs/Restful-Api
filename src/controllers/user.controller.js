@@ -75,7 +75,7 @@ const updateUserController = (req, res) => {
   const updatedUser = userService.updateUser(id, user);
 
   if (updatedUser) {
-    logger.info(`Updating user ${id}`);
+    logger.info(`Updating user with ID:  ${id}`);
     return res.status(StatusCodes.OK).send({
       status: STATUS.success,
       user: updatedUser,
@@ -104,7 +104,7 @@ const deleteUserController = (req, res) => {
       message: `User ${id} Not Found`,
     });
   }
-  logger.info(`Removing a user ${id}`);
+  logger.info(`Removing user with ID: ${id}`);
   return res.status(StatusCodes.OK).send({
     status: STATUS.success,
     message: `User ${id} successfully deleted`,
