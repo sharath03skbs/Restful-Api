@@ -1,6 +1,9 @@
-import userService from "../services/user.service";
+import pino from "pino";
 import { StatusCodes } from "http-status-codes"; //This is being used to make the doc more readable
 
+import userService from "../services/user.service";
+
+const logger = pino();
 const STATUS = {
   success: "OK",
   failure: "NO",
@@ -16,6 +19,7 @@ const getUserController = (req, res) => {
   const id = parseInt(req.params.id, 10);
   const user = userService.getUser(id);
   if (user) {
+    logger.info(`Retrieving user ${id} details`);
     return res.status(StatusCodes.OK).send({ status: STATUS.success, user });
   }
   return res
@@ -50,6 +54,7 @@ const getAllUsersController = (req, res) => {
 const addUserController = (req, res) => {
   const { body: user } = req;
   const addedUser = userService.addUser(user);
+  logger.info("Creating a user");
 
   return res.status(StatusCodes.CREATED).send({
     status: STATUS.success,
@@ -70,6 +75,7 @@ const updateUserController = (req, res) => {
   const updatedUser = userService.updateUser(id, user);
 
   if (updatedUser) {
+    logger.info(`Updating user ${id}`);
     return res.status(StatusCodes.OK).send({
       status: STATUS.success,
       user: updatedUser,
@@ -98,6 +104,7 @@ const deleteUserController = (req, res) => {
       message: `User ${id} Not Found`,
     });
   }
+  logger.info(`Removing a user ${id}`);
   return res.status(StatusCodes.OK).send({
     status: STATUS.success,
     message: `User ${id} successfully deleted`,
