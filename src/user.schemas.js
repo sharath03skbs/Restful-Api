@@ -5,6 +5,7 @@ const MIN_LENGTH = {
   name: 3,
   city: 2,
   country: 2,
+  email: 13,
 };
 const MAX_LENGTH = {
   name: 15,
@@ -28,7 +29,7 @@ export const addUserSchema = {
     body: {
       yupSchema: Yup.object().shape({
         name: Yup.string().min(MIN_LENGTH.name).max(MAX_LENGTH.name),
-        email: Yup.string().max(MAX_LENGTH.email),
+        email: Yup.string().email().min(MIN_LENGTH.email).max(MAX_LENGTH.email),
         city: Yup.string().min(MIN_LENGTH.city).max(MAX_LENGTH.city),
         country: Yup.string().min(MIN_LENGTH.country).max(MAX_LENGTH.country),
       }),
@@ -49,7 +50,7 @@ export const updateUserSchema = {
     body: {
       yupSchema: Yup.object().shape({
         name: Yup.string().min(MIN_LENGTH.name).max(MAX_LENGTH.name),
-        email: Yup.string().max(MAX_LENGTH.email),
+        email: Yup.string().email().min(MIN_LENGTH.email).max(MAX_LENGTH.email),
         city: Yup.string().min(MIN_LENGTH.city).max(MAX_LENGTH.city),
         country: Yup.string().min(MIN_LENGTH.country).max(MAX_LENGTH.country),
       }),

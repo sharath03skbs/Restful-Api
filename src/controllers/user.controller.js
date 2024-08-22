@@ -5,8 +5,8 @@ import userService from "../services/user.service";
 
 const logger = pino();
 const STATUS = {
-  success: "OK",
-  failure: "NO",
+  success: true,
+  failure: false,
 };
 
 /**
@@ -20,7 +20,7 @@ const getUserController = (req, res) => {
   const user = userService.getUser(id);
   if (user) {
     logger.info(`Retrieving user ${id} details`);
-    return res.status(StatusCodes.OK).send({ status: STATUS.success, user });
+    return res.status(StatusCodes.OK).send(user);
   }
   return res
     .status(StatusCodes.NOT_FOUND)
@@ -36,9 +36,7 @@ const getUserController = (req, res) => {
 const getAllUsersController = (req, res) => {
   const users = userService.getAllUsers();
   if (users.length) {
-    return res
-      .status(StatusCodes.OK)
-      .send({ status: STATUS.success, data: users });
+    return res.status(StatusCodes.OK).send(users);
   }
   return res
     .status(StatusCodes.NOT_FOUND)

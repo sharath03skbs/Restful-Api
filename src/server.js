@@ -1,5 +1,6 @@
 import express from "express";
 import helmet from "helmet";
+import cors from "cors";
 
 import userRoutes from "./user.routes";
 import mainRoutes from "./main.routes";
@@ -7,13 +8,14 @@ import rateLimit from "express-rate-limit";
 import compression from "compression";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
-  limit: 10, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+  limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
 });
 
+app.use(cors());
 app.use(compression());
 // Apply the rate limiting middleware to all requests.
 app.use(limiter);
