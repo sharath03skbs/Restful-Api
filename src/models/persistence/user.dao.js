@@ -90,6 +90,7 @@ const remove = (userId) => {
       user?.id: The ?. operator ensures that the code only tries to access id if user is not undefined or null. If user is undefined, the expression will short-circuit to undefined, preventing the TypeError.
       if (user?.id === userId) {*/
       //Remove the user from the array using the index
+      //This optional chaining works with the Alternative Delete logic in user controller
       users.splice(index, 1);
       return true;
     }

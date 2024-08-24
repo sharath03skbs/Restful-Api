@@ -112,23 +112,23 @@ const deleteUserController = (req, res) => {
 
 /*Alternative Delete Logic
 Delete user
-const deleteUserController =  (req, res) => {
+const deleteUserController = (req, res) => {
   const { params } = req;
   const id = parseInt(params.id, 10);
   const getUser = userService.getUser(id);
   if (getUser) {
-    userService.removeUser(id);
+    const deletedUser = userService.removeUser(id);
     return res.status(StatusCodes.OK).send({
-    status: STATUS.success,
-    message: `User ${id} successfully deleted`,
-    user: deletedUser,
-  });
-  return res.status(StatusCodes.NOT_FOUND).send({
-      status: STATUS.failure,
-      message: `User ${id} Not Found`,
+      status: STATUS.success,
+      message: `User ${id} successfully deleted`,
+      user: deletedUser,
     });
   }
-});*/
+  return res.status(StatusCodes.NOT_FOUND).send({
+    status: STATUS.failure,
+    message: `User ${id} Not Found`,
+  });
+};*/
 
 export default {
   getUserController,
